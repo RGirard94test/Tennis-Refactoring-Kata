@@ -17,6 +17,7 @@ public class TennisTest {
 
     private Player player1 = new Player("player1");
     private Player player2 = new Player("player2");
+    private Score score = new Score(0,0);
 
     public TennisTest(int player1Score, int player2Score, String expectedScore) {
         this.player1Score = player1Score;
@@ -76,7 +77,7 @@ public class TennisTest {
             if (i < this.player2Score)
                 game.wonPoint("player2");
         }
-        assertEquals(this.expectedScore, game.getScore());
+        assertEquals(this.expectedScore, game.getScore(score));
     }
 
     @Test

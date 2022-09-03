@@ -15,6 +15,9 @@ public class TennisTest {
     private int player2Score;
     private String expectedScore;
 
+    private Player player1 = new Player("player1");
+    private Player player2 = new Player("player2");
+
     public TennisTest(int player1Score, int player2Score, String expectedScore) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
@@ -78,7 +81,7 @@ public class TennisTest {
 
     @Test
     public void checkAllScoresTennisGame1() {
-        TennisGame1 game = new TennisGame1("player1", "player2");
+        TennisGame1 game = new TennisGame1(player1, player2);
         checkAllScores(game);
     }
 }

@@ -11,16 +11,16 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class TennisTest {
 
-    private int player1Score;
-    private int player2Score;
+    private int player1;
+    private int player2;
     private String expectedScore;
 
-    public TennisTest(int player1Score, int player2Score, String expectedScore) {
-        this.player1Score = player1Score;
-        this.player2Score = player2Score;
+    public TennisTest(int player1, int player2, String expectedScore) {
+        this.player1 = player1;
+        this.player2 = player2;
         this.expectedScore = expectedScore;
     }
-    
+
     @Parameters(name = "{0}:{1} = {2}")
     public static Collection<Object[]> getAllScores() {
         return Arrays.asList(new Object[][] {
@@ -29,7 +29,7 @@ public class TennisTest {
                 { 2, 2, "Thirty-All"},
                 { 3, 3, "Deuce"},
                 { 4, 4, "Deuce"},
-                
+
                 { 1, 0, "Fifteen-Love"},
                 { 0, 1, "Love-Fifteen"},
                 { 2, 0, "Thirty-Love"},
@@ -38,7 +38,7 @@ public class TennisTest {
                 { 0, 3, "Love-Forty"},
                 { 4, 0, "Win for player1"},
                 { 0, 4, "Win for player2"},
-                
+
                 { 2, 1, "Thirty-Fifteen"},
                 { 1, 2, "Fifteen-Thirty"},
                 { 3, 1, "Forty-Fifteen"},
@@ -50,7 +50,7 @@ public class TennisTest {
                 { 2, 3, "Thirty-Forty"},
                 { 4, 2, "Win for player1"},
                 { 2, 4, "Win for player2"},
-                
+
                 { 4, 3, "Advantage player1"},
                 { 3, 4, "Advantage player2"},
                 { 5, 4, "Advantage player1"},
@@ -65,38 +65,20 @@ public class TennisTest {
         });
     }
 
-    public void checkAllScores(TennisGame game) {
-        int highestScore = Math.max(this.player1Score, this.player2Score);
+    public void checkAllScores(TennisGame1 game) {
+        int highestScore = Math.max(this.player1, this.player2);
         for (int i = 0; i < highestScore; i++) {
-            if (i < this.player1Score)
-                game.wonPoint("player1");
-            if (i < this.player2Score)
-                game.wonPoint("player2");
+            if (i < this.player1)
+                player1 = player1 + 1;
+            if (i < this.player2)
+                player2 = player2 + 1;
         }
         assertEquals(this.expectedScore, game.getScore());
     }
 
     @Test
     public void checkAllScoresTennisGame1() {
-        TennisGame1 game = new TennisGame1("player1", "player2");
-        checkAllScores(game);
-    }
-
-    @Test
-    public void checkAllScoresTennisGame2() {
-        TennisGame2 game = new TennisGame2("player1", "player2");
-        checkAllScores(game);
-    }
-
-    @Test
-    public void checkAllScoresTennisGame3() {
-        TennisGame3 game = new TennisGame3("player1", "player2");
-        checkAllScores(game);
-    }
-
-    @Test
-    public void checkAllScoresTennisGame4() {
-        TennisGame game = new TennisGame4("player1", "player2");
+        TennisGame1 game = new TennisGame1(new Player("player1"), new Player("player2"), new Score());
         checkAllScores(game);
     }
 

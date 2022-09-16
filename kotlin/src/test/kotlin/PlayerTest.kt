@@ -12,4 +12,26 @@ class PlayerTest {
         //THEN
         assertEquals(actual, 0)
     }
+
+    @Test
+    fun itShouldComputePlayerWinScore() {
+        //GIVEN
+        val player = Player("jean-marc")
+        //WHEN
+        val actual = player.computeWinPlayer()
+
+        //THEN
+        assertEquals(actual, "Win for jean-marc")
+    }
+
+    @Test
+    fun itShouldComputePlayerAdvantageScore() {
+        //GIVEN
+        val player = Player("jean-marc")
+        //WHEN
+        val actual = player.computeAdvantagePlayer()
+
+        //THEN
+        assertEquals(actual, "Advantage jean-marc")
+    }
 }

@@ -8,7 +8,9 @@ class TennisTest {
     @ParameterizedTest
     @MethodSource("allScores")
     fun checkAllScoresTennisGame2(player1Score: Int, player2Score: Int, expectedScore: String) {
-        val game = TennisGame2("player1", "player2")
+        val player1: Player = Player("player1")
+        val player2: Player = Player("player2")
+        val game = TennisGame2(player1.name, player2.name)
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 

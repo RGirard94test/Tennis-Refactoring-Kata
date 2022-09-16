@@ -18,8 +18,8 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
         if (P1point == P2point && P1point < OVER_FORTY) {
             score = computeEqualScore(score)
         }
-        if (P1point == P2point && P1point >= FORTY) {
 
+        if (P1point == P2point && P1point >= FORTY) {
             score = computeDeuceScore(score)
         }
 

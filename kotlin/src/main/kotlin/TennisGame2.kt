@@ -7,48 +7,48 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
         private const val OVER_FORTY = 4
     }
 
-    var P1point: Int = 0
-    var P2point: Int = 0
+    private val player1 = Player(player1Name)
+    private val player2 = Player(player2Name)
 
     var P1res: String = ""
     var P2res: String = ""
 
     override fun getScore(): String {
         var score = ""
-        if (P1point == P2point && P1point < OVER_FORTY) {
+        if (player1.score == player2.score && player1.score < OVER_FORTY) {
             score = computeEqualScore(score)
         }
 
-        if (P1point == P2point && P1point >= FORTY) {
+        if (player1.score == player2.score && player1.score >= FORTY) {
             score = computeDeuceScore(score)
         }
 
-        if (P1point > LOVE && P2point == LOVE) {
+        if (player1.score > LOVE && player2.score == LOVE) {
             score = computePlayer1Score(score)
         }
-        if (P2point > LOVE && P1point == LOVE) {
+        if (player2.score > LOVE && player1.score == LOVE) {
             score = computePlayer2Score(score)
         }
 
-        if (P1point > P2point && P1point < OVER_FORTY) {
+        if (player1.score > player2.score && player1.score < OVER_FORTY) {
             score = computePlayer1IsLeadingScore(score)
         }
-        if (P2point > P1point && P2point < OVER_FORTY) {
+        if (player2.score > player1.score && player2.score < OVER_FORTY) {
             score = computePlayer2IsLeadingScore(score)
         }
 
-        if (P1point > P2point && P2point >= FORTY) {
+        if (player1.score > player2.score && player2.score >= FORTY) {
             score = computeAdvantagePlayer1(score)
         }
 
-        if (P2point > P1point && P1point >= FORTY) {
+        if (player2.score > player1.score && player1.score >= FORTY) {
             score = computeAdvantagePlayer2(score)
         }
 
-        if (P1point >= OVER_FORTY && P2point >= LOVE && P1point - P2point >= THIRTY) {
+        if (player1.score >= OVER_FORTY && player2.score >= LOVE && player1.score - player2.score >= THIRTY) {
             score = computeWinPlayer1(score)
         }
-        if (P2point >= OVER_FORTY && P1point >= LOVE && P2point - P1point >= THIRTY) {
+        if (player2.score >= OVER_FORTY && player1.score >= LOVE && player2.score - player1.score >= THIRTY) {
             score = computeWinPlayer2(score)
         }
         return score
@@ -62,13 +62,14 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computeWinPlayer1(score: String): String {
         var score1 = score
-        score1 = "Win for player1"
+
+        score1 = "Win for ${player1.name}"
         return score1
     }
 
     private fun computeAdvantagePlayer2(score: String): String {
         var score1 = score
-        score1 = "Advantage player2"
+        score1 = "Advantage ${player2.name}"
         return score1
     }
 
@@ -80,13 +81,13 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computePlayer2IsLeadingScore(score: String): String {
         var score1 = score
-        if (P2point == 2)
+        if (player2.score == 2)
             P2res = "Thirty"
-        if (P2point == 3)
+        if (player2.score == 3)
             P2res = "Forty"
-        if (P1point == 1)
+        if (player1.score == 1)
             P1res = "Fifteen"
-        if (P1point == 2)
+        if (player1.score == 2)
             P1res = "Thirty"
         score1 = "$P1res-$P2res"
         return score1
@@ -94,13 +95,13 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computePlayer1IsLeadingScore(score: String): String {
         var score1 = score
-        if (P1point == 2)
+        if (player1.score == 2)
             P1res = "Thirty"
-        if (P1point == 3)
+        if (player1.score == 3)
             P1res = "Forty"
-        if (P2point == 1)
+        if (player2.score == 1)
             P2res = "Fifteen"
-        if (P2point == 2)
+        if (player2.score == 2)
             P2res = "Thirty"
         score1 = "$P1res-$P2res"
         return score1
@@ -108,11 +109,11 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computePlayer2Score(score: String): String {
         var score1 = score
-        if (P2point == 1)
+        if (player2.score == 1)
             P2res = "Fifteen"
-        if (P2point == 2)
+        if (player2.score == 2)
             P2res = "Thirty"
-        if (P2point == 3)
+        if (player2.score == 3)
             P2res = "Forty"
 
         P1res = "Love"
@@ -122,11 +123,11 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computePlayer1Score(score: String): String {
         var score1 = score
-        if (P1point == 1)
+        if (player1.score == 1)
             P1res = "Fifteen"
-        if (P1point == 2)
+        if (player1.score == 2)
             P1res = "Thirty"
-        if (P1point == 3)
+        if (player1.score == 3)
             P1res = "Forty"
 
         P2res = "Love"
@@ -142,36 +143,22 @@ class TennisGame2(private val player1Name: String, private val player2Name: Stri
 
     private fun computeEqualScore(score: String): String {
         var score1 = score
-        if (P1point == LOVE)
+        if (player1.score == LOVE)
             score1 = "Love"
-        if (P1point == 1)
+        if (player1.score == 1)
             score1 = "Fifteen"
-        if (P1point == 2)
+        if (player1.score == 2)
             score1 = "Thirty"
         score1 += "-All"
         return score1
     }
 
-    fun SetP1Score(number: Int) {
-
-        for (i in 0 until number) {
-            P1Score()
-        }
-    }
-
-    fun SetP2Score(number: Int) {
-
-        for (i in 0 until number) {
-            P2Score()
-        }
-    }
-
     fun P1Score() {
-        P1point++
+        player1.score++
     }
 
     fun P2Score() {
-        P2point++
+        player2.score++
     }
 
     override fun wonPoint(player: String) {

@@ -1,39 +1,42 @@
-class TennisGame3(private val player1Name: String, private val player2Name: String) {
+import TennisScore.scoreToTennisScore
 
-    companion object {
-        private val TENNIS_SCORE = arrayOf("Love", "Fifteen", "Thirty", "Forty")
-    }
+class TennisGame3() {
 
-    private val player1: Player = Player((player1Name))
-    private val player2: Player = Player((player2Name))
-
-    fun getScore(): String {
+    fun getScore(firstPlayer: Player, secondPlayer: Player): String {
         val s: String
-        if (player1.score < 4 && player2.score < 4) {
-            if (player1.score + player2.score != 6) {
-                s = TENNIS_SCORE[player1.score]
-                return if (player1.score == player2.score) "$s-All" else "$s-${TENNIS_SCORE[player2.score]}"
+        if (firstPlayer.score < 4 && secondPlayer.score < 4) {
+            if (firstPlayer.score + secondPlayer.score != 6) {
+                s = scoreToTennisScore(firstPlayer.score)
+                if (firstPlayer.score == secondPlayer.score)
+                    return "$s-All"
+                else
+                    return "$s-${scoreToTennisScore(secondPlayer.score)}"
             } else {
-                return deuce()
+                return deuce(firstPlayer, secondPlayer)
             }
         } else {
-            return deuce()
+            return deuce(firstPlayer, secondPlayer)
         }
     }
 
-    private fun deuce(): String {
-        var s1 = ""
-        if (player1.score == player2.score)
+    fun deuce(firstPlayer: Player, secondPlayer: Player): String {
+        if (firstPlayer.score == secondPlayer.score)
             return "Deuce"
-        s1 = if (player1.score > player2.score) player1.name else player2.name
-        return if ((player1.score - player2.score) * (player1.score - player2.score) == 1) "Advantage $s1" else "Win for $s1"
+
+        return isOverForty(firstPlayer, secondPlayer)
     }
 
-    fun wonPoint(playerName: String) {
-        if (playerName === player1.name)
-            this.player1.score += 1
+    private fun isOverForty(firstPlayer: Player, secondPlayer: Player): String {
+        var s1 = ""
+        s1 = if (firstPlayer.score > secondPlayer.score) firstPlayer.name else secondPlayer.name
+        return if ((firstPlayer.score - secondPlayer.score) * (firstPlayer.score - secondPlayer.score) == 1) "Advantage $s1" else "Win for $s1"
+    }
+
+    fun wonPoint(winnerName: String, firstPlayer: Player, secondPlayer: Player) {
+        if (winnerName === firstPlayer.name)
+            firstPlayer.score += 1
         else
-            this.player2.score += 1
+            secondPlayer.score += 1
     }
 
 }

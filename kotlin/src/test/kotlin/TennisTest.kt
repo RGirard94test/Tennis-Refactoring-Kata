@@ -13,7 +13,7 @@ class TennisTest {
         checkAllScores(game, player1Score, player2Score, expectedScore)
     }
 
-    fun checkAllScores(game: TennisGame, player1Score: Int, player2Score: Int, expectedScore: String) {
+    fun checkAllScores(game: TennisGame3, player1Score: Int, player2Score: Int, expectedScore: String) {
         val highestScore = Math.max(player1Score, player2Score)
         for (i in 0 until highestScore) {
             if (i < player1Score)

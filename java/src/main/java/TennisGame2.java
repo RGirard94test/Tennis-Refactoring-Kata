@@ -11,14 +11,15 @@ public class TennisGame2 implements TennisGame
     public int P1point = LOVE;
     public int P2point = LOVE;
 
+    public Player player1;
+    public Player player2;
+
     public String P1res = "";
     public String P2res = "";
-    private String player1Name;
-    private String player2Name;
 
-    public TennisGame2(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame2(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public String getScore(){

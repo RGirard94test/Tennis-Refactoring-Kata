@@ -80,13 +80,15 @@ public class TennisTest {
     public void checkAllScoresTennisGame2() {
         Player player1 = new Player("player1");
         Player player2 = new Player("player2");
-        TennisGame2 game = new TennisGame2(player1.getName(), player2.getName());
+        TennisGame2 game = new TennisGame2(player1, player2);
         checkAllScores(game);
     }
 
     @Test
     public void testP1Score() {
-        TennisGame2 game = new TennisGame2("player1", "player2");
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+        TennisGame2 game = new TennisGame2(player1, player2);
         int number = 2;
         game.SetP1Score(number);
         assertEquals("Thirty-Love", game.getScore());
@@ -94,7 +96,9 @@ public class TennisTest {
 
     @Test
     public void testP2Score() {
-        TennisGame2 game = new TennisGame2("player1", "player2");
+        Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
+        TennisGame2 game = new TennisGame2(player1, player2);
         int number = 2;
         game.SetP2Score(number);
         assertEquals("Love-Thirty", game.getScore());

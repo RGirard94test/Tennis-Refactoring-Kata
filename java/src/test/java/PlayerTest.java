@@ -9,4 +9,11 @@ public class PlayerTest {
         String actual = player.getName();
         assertEquals("Martin", actual);
     }
+
+    @Test
+    public void getScoreShouldReturn0WhenPlayerBeginsGame(){
+        Player player = new Player("Martin");
+        int actual = player.getScore();
+        assertEquals(0, actual);
+    }
 }

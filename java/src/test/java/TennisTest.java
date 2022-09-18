@@ -20,7 +20,7 @@ public class TennisTest {
         this.player2Score = player2Score;
         this.expectedScore = expectedScore;
     }
-    
+
     @Parameters(name = "{0}:{1} = {2}")
     public static Collection<Object[]> getAllScores() {
         return Arrays.asList(new Object[][] {
@@ -29,7 +29,7 @@ public class TennisTest {
                 { 2, 2, "Thirty-All"},
                 { 3, 3, "Deuce"},
                 { 4, 4, "Deuce"},
-                
+
                 { 1, 0, "Fifteen-Love"},
                 { 0, 1, "Love-Fifteen"},
                 { 2, 0, "Thirty-Love"},
@@ -38,7 +38,7 @@ public class TennisTest {
                 { 0, 3, "Love-Forty"},
                 { 4, 0, "Win for player1"},
                 { 0, 4, "Win for player2"},
-                
+
                 { 2, 1, "Thirty-Fifteen"},
                 { 1, 2, "Fifteen-Thirty"},
                 { 3, 1, "Forty-Fifteen"},
@@ -50,7 +50,7 @@ public class TennisTest {
                 { 2, 3, "Thirty-Forty"},
                 { 4, 2, "Win for player1"},
                 { 2, 4, "Win for player2"},
-                
+
                 { 4, 3, "Advantage player1"},
                 { 3, 4, "Advantage player2"},
                 { 5, 4, "Advantage player1"},
@@ -77,27 +77,8 @@ public class TennisTest {
     }
 
     @Test
-    public void checkAllScoresTennisGame1() {
-        TennisGame1 game = new TennisGame1("player1", "player2");
-        checkAllScores(game);
-    }
-
-    @Test
     public void checkAllScoresTennisGame2() {
         TennisGame2 game = new TennisGame2("player1", "player2");
         checkAllScores(game);
     }
-
-    @Test
-    public void checkAllScoresTennisGame3() {
-        TennisGame3 game = new TennisGame3("player1", "player2");
-        checkAllScores(game);
-    }
-
-    @Test
-    public void checkAllScoresTennisGame4() {
-        TennisGame game = new TennisGame4("player1", "player2");
-        checkAllScores(game);
-    }
-
 }

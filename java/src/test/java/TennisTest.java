@@ -81,4 +81,20 @@ public class TennisTest {
         TennisGame2 game = new TennisGame2("player1", "player2");
         checkAllScores(game);
     }
+
+    @Test
+    public void testP1Score() {
+        TennisGame2 game = new TennisGame2("player1", "player2");
+        int number = 2;
+        game.SetP1Score(number);
+        assertEquals("Thirty-Love", game.getScore());
+    }
+
+    @Test
+    public void testP2Score() {
+        TennisGame2 game = new TennisGame2("player1", "player2");
+        int number = 2;
+        game.SetP2Score(number);
+        assertEquals("Love-Thirty", game.getScore());
+    }
 }
